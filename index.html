@@ -24,15 +24,17 @@
 
     <script type="text/babel">
 
+        // Componente Modal che gestisce la finestra modale
         function Modal({
             title,
             content,
-            show = false,
-            onClose = () => { },
-            onConfirme = () => { }
+            show = false, // Stato di visibilità della modale
+            onClose = () => { }, // Funzione chiamata alla chiusura
+            onConfirme = () => { } // Funzione chiamata alla conferma
 
         }) {
 
+            // Renderizza la modale solo se show è true usando createPortal per renderizzarla fuori dal flusso DOM normale
             return show && ReactDOM.createPortal(
                 <div className="modal-container">
 
@@ -51,7 +53,7 @@
 
                 </div>,
 
-                document.body
+                document.body // Punto di montaggio nel DOM
 
             )
 
@@ -64,30 +66,39 @@
             const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
             // Stato per gestire la lista degli animali da mostrare
             const [animals, setAnimals] = React.useState([]);
-            // Stato per gestire 
+            // Stato per controllare la visibilità della modale 
             const [show, setShow] = React.useState(false);
             // Stato per gestire nome animale inserito da utente
             const [animalName, setAnimalName] = React.useState('');
 
-            // Funzione 
+            // Funzione per aggiungere un nuovo animale alla lista
             function aggiungiAnimale() {
+                // Verifica che il nome non sia vuoto
                 if (!animalName) return;
+                // Aggiunge il nuovo animale all'array esistente
                 setAnimals([...animals, animalName]);
+                // Resetta il campo input
                 setAnimalName('');
+                // Chiude la modale
                 setShow(false);
             }
 
             return (
                 <div>
+                    {/* Bottone per aprire la modale */}
                     <button onClick={() => setShow(true)}> Aggiungi Animale</button>
+
+                    {/* Sezione espandibile con la lista degli animali */}
                     <details>
                         <summary>Animali</summary>
                         <ul>
+                            {/* Mappatura dell'array degli animali in elementi lista */}
                             {animals.map((animale, index) => (
                                 <li key={index}>{animale}</li>
                             ))}
                         </ul>
                     </details>
+                    {/* Componente Modal con le sue props */}
                     <Modal
                         show={show}
                         onClose={() => setShow(false)}
@@ -96,6 +107,7 @@
                         }}
                         title="Aggiungi Animale"
                         content={
+                            // Input controllato per inserire il nome dell'animale
                             <input
                                 type="text"
                                 value={animalName}
