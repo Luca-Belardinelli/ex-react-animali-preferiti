@@ -23,51 +23,83 @@
     <!-- creazione componente react -->
 
     <script type="text/babel">
+        // // funzione per mappare l'array e creare una lista
+        // const ListaAnimali = () => {
+
+        //     // array di stringhe
+        //     // const animali = ["cane", "gatto", "elefante", "tigri", "riccio", "gufo", "leone", "zebra"];
+        //     const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+        //     // Stato per gestire la lista degli animali da mostrare
+        //     const [animals, setAnimals] = React.useState([]);
+
+        //     // Funzione che aggiunge un animale casuale alla lista
+        //     function aggiungiAnimale() {
+        //         // Sceglie un animale a caso da animalsChoices
+        //         const nuovoAnimale = animalsChoices[Math.floor(Math.random() * animalsChoices.length)]
+        //         // Aggiunge il nuovo animale all’array esistente
+        //         setAnimals([...animals, nuovoAnimale])
+        //     }
+
+        //     return (
+        //         <div>
+        //             <button onClick={aggiungiAnimale}> Aggiungi Animale</button>
+        //             <details>
+        //                 <summary>Animali</summary>
+        //                 <ul>
+        //                     {animals.map((animale, index) => (
+        //                         <li key={index}>{animale}</li>
+        //                     ))}
+        //                 </ul>
+        //             </details>
+        //         </div>
+
+        //     )
+        // }
+
+        // // montaggio nel dom
+
+        // const { createRoot } = ReactDOM;
+        // // Seleziona l’elemento con classe .lista-animali
+        // const elementoSpecifico = document.querySelector('.lista-animali')
+        // // Crea il "root" React
+        // const root = createRoot(elementoSpecifico);
+        // // Monta il componente React nel DOM
+        // root.render(<ListaAnimali />);
 
 
-        // funzione per mappare l'array e creare una lista
-        const ListaAnimali = () => {
+        function Modal({
 
-            // array di stringhe
-            // const animali = ["cane", "gatto", "elefante", "tigri", "riccio", "gufo", "leone", "zebra"];
-            const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
-            // Stato per gestire la lista degli animali da mostrare
-            const [animals, setAnimals] = React.useState([]);
+            title,
 
-            // Funzione che aggiunge un animale casuale alla lista
-            function aggiungiAnimale() {
-                // Sceglie un animale a caso da animalsChoices
-                const nuovoAnimale = animalsChoices[Math.floor(Math.random() * animalsChoices.length)]
-                // Aggiunge il nuovo animale all’array esistente 
-                setAnimals([...animals, nuovoAnimale])
-            }
+            content,
 
-            return (
-                <div>
-                    <button onClick={aggiungiAnimale}> Aggiungi Animale</button>
-                    <details>
-                        <summary>Animali</summary>
-                        <ul>
-                            {animals.map((animale, index) => (
-                                <li key={index}>{animale}</li>
-                            ))}
-                        </ul>
-                    </details>
-                </div>
+            show = false,
+
+            onClose = () => { }
+
+        }) {
+
+            return show && ReactDOM.createPortal(
+
+                <div className="modal-container">
+
+                    <div className="modal">
+
+                        <h2>{title}</h2>
+
+                        <p>{content}</p>
+
+                        <button onClick={onClose}>Annulla</button>
+
+                    </div>
+
+                </div>,
+
+                document.body
 
             )
+
         }
-
-        // montaggio nel dom
-
-        const { createRoot } = ReactDOM;
-        // Seleziona l’elemento con classe .lista-animali
-        const elementoSpecifico = document.querySelector('.lista-animali')
-        // Crea il "root" React
-        const root = createRoot(elementoSpecifico);
-        // Monta il componente React nel DOM
-        root.render(<ListaAnimali />);
-
 
     </script>
 
