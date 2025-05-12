@@ -1,12 +1,62 @@
 <!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I miei animali Preferiti</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- importo react -->
+
+    <!-- react creazione componenti -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+
+    <!-- react dom per renderizzare react nel dom -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- babel per support jsx nel browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- creazione componente react -->
+
+    <script type="text/babel">
+
+
+
+        // funzione per mappare l'array e creare una lista
+        const ListaAnimali = () => {
+
+            // array di stringhe
+            const animali = ["cane", "gatto", "elefante", "tigri", "riccio", "gufo", "leone", "zebra"];
+
+            return (
+                <details>
+                    <summary>Animali</summary>
+                    <ul>
+                        {animali.map((animale, index) => (
+                            <li key={index}>{animale}</li>
+                        ))}
+                    </ul>
+                </details>
+            )
+        }
+
+        // montaggio nel dom
+
+        const { createRoot } = ReactDOM;
+
+        const elementoSpecifico = document.querySelector('.lista-animali')
+
+        const root = createRoot(elementoSpecifico);
+
+        root.render(<ListaAnimali />);
+
+
+    </script>
+
 </head>
 
 <body>
@@ -17,6 +67,7 @@
         <figure>
             <img src="https://picsum.photos/400/300" alt="Immagine Casuale">
         </figure>
+        <!-- elemento in cui voglio montare react -->
         <div class="lista-animali"></div>
     </main>
     <footer>
